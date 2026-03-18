@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="a2_vx300s" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--
+    This file is only a mounting template.
+    a2.urdf.xacro and vx300s.urdf.xacro must be converted into xacro macros
+    before the xacro:a2 / xacro:vx300s calls below can work.
+  -->
+  <xacro:include filename="$(find combine)/a2.urdf.xacro"/>
+  <xacro:include filename="$(find combine)/vx300s.urdf.xacro"/>
+
+  <!--
+    Expected link names in the current models:
+    - A2 root link:            base_link
+    - VX300S root link:        vx300s/base_link
+  -->
+  <xacro:a2/>
+  <xacro:vx300s/>
+
+  <!--
+    Mount the arm on top of the A2 body.
+    Adjust xyz/rpy after checking the real bracket and desired orientation.
+  -->
+  <joint name="arm_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="vx300s/base_link"/>
+    <origin xyz="0.20 0 0.16" rpy="0 0 0"/>
+  </joint>
+
+</robot>
